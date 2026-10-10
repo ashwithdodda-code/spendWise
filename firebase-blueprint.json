@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Student profile preferences and account settings",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 120 },
+        "currency": { "type": "string", "maxLength": 10 },
+        "currencySymbol": { "type": "string", "maxLength": 5 },
+        "monthlyBudget": { "type": "number" },
+        "theme": { "type": "string", "enum": ["system", "light", "dark"] },
+        "alertThresholds": { "type": "array" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "email"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Student expense or income ledger entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "amount": { "type": "number" },
+        "category": { "type": "string", "maxLength": 50 },
+        "date": { "type": "string", "maxLength": 20 },
+        "description": { "type": "string", "maxLength": 200 },
+        "paymentMethod": { "type": "string", "maxLength": 50 },
+        "type": { "type": "string", "enum": ["expense", "income"] },
+        "merchant": { "type": "string", "maxLength": 100 },
+        "tags": { "type": "array" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "amount", "category", "date", "description", "type", "paymentMethod"]
+    },
+    "Budget": {
+      "title": "Budget",
+      "description": "Monthly overall or category-specific spending targets",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "category": { "type": "string", "maxLength": 50 },
+        "limitAmount": { "type": "number" },
+        "month": { "type": "string", "maxLength": 10 },
+        "warningThreshold": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "category", "limitAmount"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores user profile and preferences"
+    },
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "User income and expense transactions"
+    },
+    "/budgets/{budgetId}": {
+      "schema": "Budget",
+      "description": "Category and overall budget targets per user"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "SpendWise — Student Expense Analytics",
+  "description": "A comprehensive financial data analytics and visualization platform for college students to track, analyze, and optimize spending with real statistical models, budget pacing, and anomaly detection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
